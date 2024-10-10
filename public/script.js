@@ -4,7 +4,7 @@ fetch('/api/tables')
         const dataDiv = document.getElementById('data');
         tables.forEach(table => {
             const tableDiv = document.createElement('div');
-            tableDiv.className = 'table-container'; // Добавление класса для контейнера
+            tableDiv.className = 'table-container';
             tableDiv.innerHTML = `<h2>${table}</h2><table border="1" id="${table}"><thead><tr></tr></thead><tbody></tbody></table>`;
             dataDiv.appendChild(tableDiv);
             
@@ -20,7 +20,6 @@ fetch('/api/tables')
                             tableDiv.querySelector('tr').appendChild(th);
                         });
 
-                        // Логика для адаптивного отображения
                         if (window.innerWidth <= 425 && headers.length > 2) {
                             data.forEach(row => {
                                 const tr = document.createElement('tr');
@@ -43,10 +42,10 @@ fetch('/api/tables')
                     }
                 })
                 .catch(error => {
-                    console.error('Ошибка при получении данных:', error);
+                    console.error('Error while receiving the data:', error);
                 });
         });
     })
     .catch(error => {
-        console.error('Ошибка при получении таблиц:', error);
+        console.error('Error while getting the tables:', error);
     });
