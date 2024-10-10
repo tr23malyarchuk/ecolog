@@ -20,25 +20,15 @@ fetch('/api/tables')
                             tableDiv.querySelector('tr').appendChild(th);
                         });
 
-                        if (window.innerWidth <= 425 && headers.length > 2) {
-                            data.forEach(row => {
-                                const tr = document.createElement('tr');
-                                const singleColumnTd = document.createElement('td');
-                                singleColumnTd.innerHTML = headers.map(header => `${header}: ${row[header]}`).join('<br>');
-                                tr.appendChild(singleColumnTd);
-                                tbody.appendChild(tr);
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            headers.forEach(header => {
+                                const td = document.createElement('td');
+                                td.textContent = row[header];
+                                tr.appendChild(td);
                             });
-                        } else {
-                            data.forEach(row => {
-                                const tr = document.createElement('tr');
-                                headers.forEach(header => {
-                                    const td = document.createElement('td');
-                                    td.textContent = row[header];
-                                    tr.appendChild(td);
-                                });
-                                tbody.appendChild(tr);
-                            });
-                        }
+                            tbody.appendChild(tr);
+                        });
                     }
                 })
                 .catch(error => {
