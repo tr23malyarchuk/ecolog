@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моніторинг екологічних об'єктів</title>
+    <title>Содержание базы данных</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <h1>Дані з бази даних</h1>
-    <div id="data"></div>
+    <div id="data">
+      <div class="filter-container">
+        <h1>Данные из базы</h1>        
+        <label for="filterInput">Фильтровать по ключевым словам:</label>
+        <input type="text" id="filterInput" placeholder="Введите ключевые слова">
+      </div>        
+    </div>
 
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
 </body>
 </html>
