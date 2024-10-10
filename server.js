@@ -1,15 +1,29 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
+const mysql = require('mysql2');
 
-// Middleware для обработки JSON
-app.use(express.json());
-
-// Пример роута для получения данных из базы
-app.get('/', (req, res) => {
-    res.send('Hello from Node.js server!');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'mydbuser',
+  password: 'mydb',
+  database: 'mydb'
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+connection.connect(err => {
+  if (err) {
+    console.error('Error connection to MySQL database:', err);
+    return;
+  }
+  console.log('Connected to MySQL');
+});
+
+app.get('/api/data', (req, res) => {
+  const query = 'SELECT * FROM mydb.обєкт';
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Query executing error:', err);
+      res.status(500).send('Database error');
+      return;
+    }
+    res.json(results);
+  });
 });
