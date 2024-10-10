@@ -1,11 +1,10 @@
 const express = require('express');
 const mysql = require('mysql2');
-
 const app = express();
 const port = 3000;
 
 const connection = mysql.createConnection({
-    host: 'localhost', 
+    host: 'localhost', // измените при необходимости
     user: 'root',
     password: 'Av_s0l*YaM4)2005',
     database: 'ecolog'
@@ -13,30 +12,42 @@ const connection = mysql.createConnection({
 
 app.use(express.static('public'));
 
-app.get('/api/data', (req, res) => {
-    const query = 'SELECT * FROM обєкт';
-    connection.query(query, (error, results) => {
-        if (error) {
-            return res.status(500).json({ error: error.message });
+function connectWithRetry() {
+    connection.connect((err) => {
+        if (err) {
+            console.error('Connection error: ' + err.stack);
+            console.log("I'll try to connect in 5 seconds...");
+            setTimeout(connectWithRetry, 5000);
+        } else {
+            console.log('Connected as id ' + connection.threadId);
+        }
+    });
+}
+
+connectWithRetry();
+
+// Получение названий таблиц
+app.get('/api/tables', (req, res) => {
+    connection.query('SHOW TABLES', (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err });
+        }
+        const tables = results.map(row => Object.values(row)[0]);
+        res.json(tables);
+    });
+});
+
+// Получение данных из таблицы
+app.get('/api/data/:table', (req, res) => {
+    const table = req.params.table;
+    connection.query(`SELECT * FROM ??`, [table], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err });
         }
         res.json(results);
     });
 });
 
 app.listen(port, () => {
-    console.log(`Сервер запущен на http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
-
-function connectWithRetry() {
-    connection.connect((err) => {
-        if (err) {
-            console.error('Ошибка подключения: ' + err.stack);
-            console.log("Попробую подключиться снова через 5 секунд...");
-            setTimeout(connectWithRetry, 5000);
-        } else {
-            console.log('Подключено как id ' + connection.threadId);
-        }
-    });
-}
-
-connectWithRetry();
