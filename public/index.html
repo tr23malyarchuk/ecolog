@@ -8,11 +8,52 @@
 </head>
 <body>
     <div id="data">
-      <div class="filter-container">
-        <h1>Дані з бази даних</h1>        
-        <label for="filterInput">Фільтрувати за ключовими словами:</label>
-        <input type="text" id="filterInput" placeholder="Введіть ключові слова">
-      </div>        
+        <div class="filter-container">
+            <h1>Дані з бази даних</h1>
+            <label for="objectName">Назва об’єкту:</label>
+            <select id="objectName">
+                <option value="">Виберіть об’єкт</option>
+                <option value="Рівне">Рівне</option>
+                <option value="Хмельницький">Хмельницький</option>
+                <option value="Бровари">Бровари</option>
+            </select>
+
+            <label for="pollutantName">Назва забруднюючої речовини:</label>
+            <select id="pollutantName">
+                <option value="">Виберіть речовину</option>
+                <option value="БСК5">БСК5</option>
+                <option value="Завислі речовини">Завислі речовини</option>
+                <option value="Азот амонійний">Азот амонійний</option>
+                <option value="Нітрити">Нітрити</option>
+                <option value="Нітрати">Нітрати</option>
+                <option value="Сульфати">Сульфати</option>
+                <option value="Хлориди">Хлориди</option>
+                <option value="Фосфати">Фосфати</option>
+                <option value="Залізо">Залізо</option>
+                <option value="Нафтопродукти">Нафтопродукти</option>
+                <option value="СПАР">СПАР</option>
+                <option value="Фтор">Фтор</option>
+                <option value="Мідь">Мідь</option>
+                <option value="Цинк">Цинк</option>
+                <option value="Формальдегід">Формальдегід</option>
+                <option value="Сухий залишок">Сухий залишок</option>
+                <option value="ХСК">ХСК</option>
+            </select>
+
+            <label for="year">Рік:</label>
+            <select id="year">
+                <option value="">Виберіть рік</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+            </select>
+        </div>
+        <div class="table-container" id="tableContainer"></div>
     </div>
 
     <script type="module" src="js/script.js"></script>

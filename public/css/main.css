@@ -1,4 +1,120 @@
-@import url('page.css');
-@import url('table.css');
-@import url('adaptive.css');
-@import url('filter.css');
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto; 
+    }
+}
+
+@media (max-width: 768px) {
+    th, td {
+        padding: 10px; 
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px; 
+    }
+
+    h1 {
+        font-size: 24px; 
+    }
+
+    h2 {
+        font-size: 20px; 
+    }
+
+    th, td {
+        padding: 8px; 
+    }
+
+    table {
+        font-size: 14px; 
+    }
+}
+
+@media (min-width: 1024px) {
+    .table-container {
+        overflow-x: visible; 
+    }
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-container label {
+    margin: 10px 0 5px;
+}
+
+.filter-container select {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+    color: #555;
+}
+
+#data {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+}
+
+.table-container {
+    width: 80%; 
+    max-width: 800px; 
+    margin: 20px auto; 
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%; 
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e0e0e0;
+}

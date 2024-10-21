@@ -1,42 +1,51 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const app = express();
 const port = 3000;
 
-const db = mysql.createConnection({
+const connection = mysql.createConnection({
     host: 'localhost', 
     user: 'root',
     password: 'Av_s0l*YaM4)2005',
     database: 'ecolog'
 });
 
-app.get('/api/substances', (req, res) => {
-    db.query('SELECT DISTINCT назва_забруд_речовини FROM інфа_про_водойми', (err, results) => {
+app.use(express.static('public'));
+
+function connectWithRetry() {
+    connection.connect((err) => {
         if (err) {
-            return res.status(500).send(err);
+            console.error('Connection error: ' + err.stack);
+            console.log("I'll try to connect in 5 seconds...");
+            setTimeout(connectWithRetry, 5000);
+        } else {
+            console.log('Connected as id ' + connection.threadId);
         }
-        res.json(results);
+    });
+}
+
+connectWithRetry();
+
+app.get('/api/tables', (req, res) => {
+    connection.query('SHOW TABLES', (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err });
+        }
+        const tables = results.map(row => Object.values(row)[0]);
+        res.json(tables);
     });
 });
 
-app.get('/api/objects', (req, res) => {
-    db.query('SELECT DISTINCT обєкт FROM назва_обєкту', (err, results) => {
+app.get('/api/data/:table', (req, res) => {
+    const table = req.params.table;
+    connection.query(`SELECT * FROM ??`, [table], (err, results) => {
         if (err) {
-            return res.status(500).send(err);
-        }
-        res.json(results);
-    });
-});
-
-app.get('/api/years', (req, res) => {
-    db.query('SELECT DISTINCT Рік FROM інфа_про_повітря', (err, results) => {
-        if (err) {
-            return res.status(500).send(err);
+            return res.status(500).json({ error: err });
         }
         res.json(results);
     });
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
