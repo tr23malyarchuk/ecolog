@@ -1,7 +1,7 @@
 export const createTableDiv = (table) => {
     const tableDiv = document.createElement('div');
     tableDiv.className = 'table-container';
-    tableDiv.innerHTML = `<h2>${table}</h2><table border="1" id="${table}"><thead><tr></tr></thead><tbody></tbody></table>`;
+    tableDiv.innerHTML = `<h2>${table}</h2><table border="1" id="${table}"><thead><tr></tr></thead><tbody style="display: table-row-group;"></tbody></table>`; // Set default display for tbody
     return tableDiv;
 };
 
@@ -30,8 +30,8 @@ export const buildTable = (tbody, data, tableDiv) => {
     } else {
         const tr = document.createElement('tr');
         const td = document.createElement('td');
-        td.colSpan = 100; // Установите значение для охвата всех столбцов
-        td.textContent = 'Дані не знайдено'; // Сообщение, если данные отсутствуют
+        td.colSpan = 100; 
+        td.textContent = 'Дані не знайдено'; 
         tr.appendChild(td);
         tbody.appendChild(tr);
     }
