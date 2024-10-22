@@ -9,7 +9,6 @@ export const buildTable = (tbody, data, tableDiv) => {
     if (data.length > 0) {
         const headers = Object.keys(data[0]);
 
-        // Добавление заголовков столбцов
         const thead = tableDiv.querySelector('thead tr');
         headers.forEach(header => {
             const th = document.createElement('th');
@@ -17,7 +16,6 @@ export const buildTable = (tbody, data, tableDiv) => {
             thead.appendChild(th);
         });
 
-        // Заполнение строк таблицы
         data.forEach(row => {
             const tr = document.createElement('tr');
             headers.forEach(header => {
