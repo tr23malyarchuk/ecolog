@@ -6,8 +6,8 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: 'localhost', 
     user: 'root',
-    password: 'Av_s0l*YaM4)2005',
-    database: 'ecolog'
+    password: '',
+    database: 'new_ecolog'
 });
 
 app.use(express.static('public'));

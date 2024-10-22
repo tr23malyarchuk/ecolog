@@ -1,7 +1,7 @@
 export const createTableDiv = (table) => {
     const tableDiv = document.createElement('div');
     tableDiv.className = 'table-container';
-    tableDiv.innerHTML = `<h2>${table}</h2><table border="1" id="${table}"><thead><tr></tr></thead><tbody style="display: table-row-group;"></tbody></table>`; // Set default display for tbody
+    tableDiv.innerHTML = `<h2>${table}</h2><table border="1" id="${table}"><thead><tr></tr></thead><tbody style="display: table-row-group;"></tbody></table>`;
     return tableDiv;
 };
 
